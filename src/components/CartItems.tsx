@@ -1,9 +1,35 @@
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeItem, RootState } from "../redux/store";
+
 export default function CartItems() {
+  const dispatch = useDispatch()
+  const cartItems = useSelector((store:RootState) => store.cart.items)
+
+  interface ITEM {
+    id: string;
+    title: string;
+    price: number;
+  quantity: number;
+  }
+
+  const handleRemoveFromCart = (item: string) => {
+    dispatch(removeItem(item))
+  }
+
+  const handleAddToCart = (item:ITEM) => {
+    dispatch(addToCart(item))
+  }
+
+  const totalPrice = cartItems.reduce((acc, curr) => {
+    return acc + curr.price * curr.quantity
+  }, 0);
+
+  const formattedTotalPrice = totalPrice.toFixed(2);
+
   return (
     <div id="cart">
-      <p>No items in cart!</p>
-
-      {/* <ul id="cart-items">
+   { !cartItems && <p>No items in cart!</p>}
+      { cartItems && <ul id="cart-items">
           {cartItems.map((item) => {
             const formattedPrice = `$${item.price.toFixed(2)}`;
 
@@ -23,11 +49,11 @@ export default function CartItems() {
               </li>
             );
           })}
-        </ul> */}
+        </ul>}
 
-      {/* <p id="cart-total-price">
+      <p id="cart-total-price">
         Cart Total: <strong>{formattedTotalPrice}</strong>
-      </p> */}
+      </p>
     </div>
   );
 }

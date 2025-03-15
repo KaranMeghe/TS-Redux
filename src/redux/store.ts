@@ -1,7 +1,7 @@
 /** @format */
 
 import { configureStore } from '@reduxjs/toolkit';
-import { cartReducer } from './cart-slice';
+import { cartReducer, addToCart, removeItem } from './cart-slice';
 
 const store = configureStore({
   reducer: {
@@ -9,4 +9,8 @@ const store = configureStore({
   },
 });
 
-export { store };
+export { store, addToCart, removeItem };
+
+// ✅ Define the RootState type
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

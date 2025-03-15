@@ -12,7 +12,7 @@ export default function Cart({ onClose }: CartProps) {
       <div className="cart-backdrop" />
       <dialog id="cart-modal" open>
         <h2>Your Cart</h2>
-        <CartItems />
+        <CartItems  />
         <p id="cart-actions">
           <button onClick={onClose}>Close</button>
         </p>

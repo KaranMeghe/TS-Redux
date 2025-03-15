@@ -1,3 +1,6 @@
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/store.ts";
+
 type ProductProps = {
   id: string;
   image: string;
@@ -7,12 +10,18 @@ type ProductProps = {
 };
 
 export default function Product({
+  id,
   image,
   title,
   price,
   description,
 }: ProductProps) {
-  function handleAddToCart() {}
+
+  const dispatch = useDispatch();
+
+  function handleAddToCart() {
+    dispatch(addToCart({id,title,price}))
+  }
 
   return (
     <article className="product">
